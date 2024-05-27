@@ -1,0 +1,124 @@
+<p-toast></p-toast>
+<spacetrader-frame>
+    <div class="wrapper">
+        <div class="card">
+            <h1>Comercio Planetario</h1>
+        </div>
+
+        @if (this.info$ | async; as info) {
+        @if (info.planet === null) {
+        <div class="card">
+            <div class="individual-info">
+                <h1> No estás en un planeta, solicita navegación</h1>
+            </div>
+        </div>
+        }
+        @else {
+
+        @if (this.market$ | async; as market) {
+        <div class="card">
+            <div class="individual-info info-wrapper">
+                <div>
+                    <h1>Factor demanda:</h1>
+                    <h2>{{market.demandFactor}}</h2>
+                </div>
+
+                <div>
+                    <h1>Factor oferta:</h1>
+                    <h2>{{market.offerFactor}}</h2>
+                </div>
+
+                <div>
+                    <h1>Créditos disponibles:</h1>
+                    <h2>{{info.credits | currency}}</h2>
+                </div>
+
+                <div>
+                    <h1>Capacidad de la nave:</h1>
+                    <h2>{{info.actualCargoVolume}}/{{info.spaceship.cargoCapacity}}</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="trading-wrapper">
+            <div class="card">
+                <h1>Vender</h1>
+                <div class="product-wrapper">
+                    @for (cargo of this.cargo$ | async; track $index) {
+                    <div class="product-item">
+                        <div class="icon-wrapper">
+                            <img [src]='cargo.product.img' alt="">
+                        </div>
+
+                        <div class="individual-info">
+                            <h1>Nombre</h1>
+                            <h2>{{cargo.product.name}}</h2>
+                        </div>
+
+                        <div class="individual-info">
+                            <h1>$</h1>
+                            <h2>{{cargo.sellPrice| currency}}</h2>
+                        </div>
+
+                        <div class="individual-info">
+                            <h1>Cantidad</h1>
+                            <h2>{{cargo.quantity}}</h2>
+                        </div>
+
+                        <div class="individual-info">
+                            <h1>V</h1>
+                            <h2>{{cargo.product.volume | number: '1.2-2'}}</h2>
+                        </div>
+
+                        <p-inputNumber #stock [showButtons]="true" [min]="1" [max]="cargo.quantity" [inputStyle]="{width: '50%'}"/>
+                        <p-button [label]='this.getLabel("Vender:", cargo.sellPrice, stock.value)' (onClick)="sell(cargo.id, stock.value)" [disabled]="stock.value == null" [style]="{width: '100%'}" />
+                    </div>
+                    }@empty {
+                        <h2>No hay productos en la bodega</h2>
+                    }
+                </div>
+            </div>
+            <div class="card">
+                <h1>Comprar</h1>
+                <div class="product-wrapper">
+                    @for (product of market.products; track $index) {
+                    <div class="product-item">
+                        <div class="icon-wrapper">
+                            <img [src]='product.product.img' alt="">
+                        </div>
+
+                        <div class="individual-info name">
+                            <h1>Nombre</h1>
+                            <h2>{{product.product.name}}</h2>
+                        </div>
+
+                        <div class="individual-info">
+                            <h1>$</h1>
+                            <h2>{{product.buyPrice | currency}}</h2>
+                        </div>
+
+                        <div class="individual-info">
+                            <h1>Cantidad</h1>
+                            <h2>{{product.stock}}</h2>
+                        </div>
+
+                        <div class="individual-info">
+                            <h1>V</h1>
+                            <h2>{{product.product.volume | number:'1.2-2'}}</h2>
+                        </div>
+
+
+                        <p-inputNumber #stock [showButtons]="true" [min]="1" [max]="product.stock" [inputStyle]="{width: '50%'}"/>
+                        <p-button [label]="this.getLabel('Comprar:', product.buyPrice, stock.value)" (onClick)="buy(product.id, stock.value)" [disabled]="stock.value == null" [style]="{width: '100%'}" />
+                    </div>
+                    }@empty {
+                        <h2>No hay productos en el planeta</h2>
+                    }
+                </div>
+            </div>
+        </div>
+        }
+        }
+        }
+    </div>
+</spacetrader-frame>

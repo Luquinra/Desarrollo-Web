@@ -1,0 +1,37 @@
+<header>
+    <div class="flex-1 self-center">
+        <a>
+            <img src="assets/logo-no-background.png" class="h-16 w-auto mr-3" alt="SpaceTrader Logo">
+        </a>
+    </div>
+    
+    <div class="nav">
+        <ul class="nav-list">
+            <li>
+                <a [routerLink]="'/home'" routerLinkActive="nav-item-selected" class="nav-item"
+                    [routerLinkActiveOptions]="{ exact: true }" ariaCurrentWhenActive="page">
+                    Inicio
+                </a>
+            </li>
+
+            @if (this.getPlayerType() === "CAPTAIN" || this.getPlayerType() === "PILOT") {
+                <li>
+                    <a [routerLink]="'/navigate'" class="nav-item" routerLinkActive="nav-item-selected"
+                        class="nav-item" ariaCurrentWhenActive="page">Navegar</a>
+                </li>
+            }
+
+            @if (this.getPlayerType() === "CAPTAIN" || this.getPlayerType() === "TRADER") {
+                <li>
+                    <a [routerLink]="'/trade'" class="nav-item" routerLinkActive="nav-item-selected"
+                        class="nav-item" ariaCurrentWhenActive="page">Comerciar</a>
+                </li>
+            }
+            
+            <li>
+                <p-button (onClick)="this.logout()" label="Cerrar sesión"
+                    styleClass="p-button-outlined p-button-danger p-button-sm"></p-button>
+            </li>
+        </ul>
+    </div>
+</header>

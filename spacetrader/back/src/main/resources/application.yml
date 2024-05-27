@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: spacetrader
+  datasource:
+    url: jdbc:h2:mem:spacetraderdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: password
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+jwt:
+  token:
+    secret: 5pAq6zRyX8bC3dV2wS7gN1mK9jF0hL4tUoP6iBvE3nG8xZaQrY7cW2fA=

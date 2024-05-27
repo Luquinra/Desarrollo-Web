@@ -1,0 +1,65 @@
+<p-toast></p-toast>
+<spacetrader-frame>
+    <div class="wrapper">
+        <div class="card">
+            <div class="individual-info">
+                <h1>Navegación estelar</h1>
+            </div>
+        </div>
+
+        <div class="card">
+            <h1>Navegar a una estrella</h1>
+            @if (this.closestStars$ | async; as closestStars) {
+            <div class="star-container">
+
+                @for (star of closestStars; track $index) {
+                <div class="star-item" (click)='this.navigate(star.destinationStar.id, "STAR")'>
+
+                    <div class="icon-wrapper">
+                        <img [src]='star.destinationStar.img' alt="" class="star">
+                    </div>
+
+                    <div class="self-end">
+                        <h1>Nombre</h1>
+                        <h2>{{star.destinationStar.name}}</h2>
+                    </div>
+
+                    <div>
+                        <h1>Tiempo</h1>
+                        <h2>{{star.travelTime}}</h2>
+                    </div>
+                </div>
+                }@empty {
+                <h1>Seguramente, un error</h1>
+                }
+
+            </div>
+            }@else {
+            <h1>Cargando...</h1>
+            }
+        </div>
+
+        <div class="card">
+            <h1>Navegar a un planeta</h1>
+            @if (this.starPlanets$ | async; as starPlanets) {
+            <div class="star-container">
+                @for (planet of starPlanets; track $index) {
+                <div class="star-item" (click)='this.navigate(planet.id, "PLANET")'>
+                    <div class="icon-wrapper mx-10">
+                        <img [src]='planet.img' alt="" class="w-full">
+                    </div>
+
+                    <h1 class="self-end">Nombre:</h1>
+                    <h2>{{planet.name}}</h2>
+                </div>
+                }
+                @empty {
+                <h2>La estrella no tiene planetas habitados</h2>
+                }
+            </div>
+            }@else {
+            <h1>Cargando...</h1>
+            }
+        </div>
+    </div>
+</spacetrader-frame>

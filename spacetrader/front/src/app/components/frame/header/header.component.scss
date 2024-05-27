@@ -1,0 +1,25 @@
+:host{
+    @apply block sticky top-0 z-50 bg-white w-screen left-0 border-b border-gray-200 shadow-md;
+}
+
+header{
+    @apply flex py-4 px-16;
+    background-color: var(--surface-card);
+}
+.nav{
+    @apply flex gap-5 items-center
+}
+.nav-item :hover{
+    color: #34d399
+}
+
+.nav-list{
+    @apply flex flex-row gap-5 p-4 mt-4 font-medium items-center 
+}
+
+.nav-item-selected{
+    @apply text-[#34d399] ;
+}
+li a{
+    @apply font-bold text-xl
+}

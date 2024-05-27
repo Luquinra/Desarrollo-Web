@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-SpacetraderApplication<spacetrader>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.luisaq.spacetrader.SpacetraderApplication",
+            "projectName": "spacetrader",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

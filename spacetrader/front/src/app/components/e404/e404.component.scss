@@ -1,0 +1,18 @@
+:host{
+    @apply relative flex items-center justify-center p-5 h-screen z-10;
+}
+
+.wrapper {
+    @apply h-2/3 w-2/3 p-16 flex items-center justify-center gap-5;
+    background-color: var(--surface-card);
+    border-radius: 20px;
+    box-shadow: 0 4px 24px #34d399;
+}
+
+.card-info{
+    @apply overflow-hidden flex flex-col gap-6 items-center justify-center;
+}
+
+img{
+    @apply w-64 h-auto;
+}

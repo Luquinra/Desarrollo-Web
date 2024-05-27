@@ -1,0 +1,96 @@
+<p-toast></p-toast>
+<spacetrader-frame>
+    <div class="wrapper">
+
+        <div class="card">
+            <div class="individual-info">
+                <h1>Estado actual</h1>
+                <h2>Bienvenido: {{this.getUsername()}}</h2>
+            </div>
+            
+        </div>
+
+        <div class="card">
+
+            @if (this.info$ | async; as info) {
+            <div class="card-info">
+                <div class="individual-info star-wrapper">
+                    <h1>Estrella</h1>
+                    <h2>{{info.star.name}}</h2>
+                    <div class="icon-wrapper"><img class="star" [src]='info.star.img' alt=""></div>
+                </div>
+
+                @if(info.planet !== null){
+                <div class="individual-info planet-wrapper">
+                    <h1>Planeta</h1>
+                    <h2>{{info.planet.name}}</h2>
+                    <div class="icon-wrapper">
+                        <img [src]='info.planet.img'alt="">
+                    </div>
+                </div>
+                }@else {
+                    <div class="individual-info self-start planet-wrapper">
+                        <h1>Planeta</h1>
+                        <h2 class="text-center">No estás en un planeta, si la extrella tiene planetas habitables, navega a uno</h2>
+                    </div>
+                }
+
+                <div class="individual-info crewmembers-wrapper">
+                    <h1>Tripulación</h1>
+                    @for (player of info.crewMembers; track $index) {
+                        <div class="crew-member">
+                            <img [src]='player.img' alt="">
+                            <h1>{{player.username}}</h1>
+                            @switch (player.role) {
+                                @case ("CAPTAIN") {
+                                    <h2>Capitán</h2>
+                                }
+                                @case ("TRADER") {
+                                    <h2>Comerciante</h2>
+                                }
+                                @case ("PILOT") {
+                                    <h2>Piloto</h2>
+                                }
+                            }
+                            
+                        </div>
+                    }
+                </div>
+
+                <div class="individual-info spaceship-wrapper">
+                    <h1>Nave</h1>
+                    <h2>{{info.spaceship.name}}</h2>
+                    <h2>Capacidad: {{info.spaceship.cargoCapacity}}</h2>
+                    <h2>Velocidad: {{info.spaceship.maxSpeed}}</h2>
+                    <img [src]='info.spaceship.img'alt="">
+                </div>
+
+                <div class="individual-info cargo-wrapper text-center">
+                    <h1>Escaner:</h1>
+                    @if (this.otherCrews$ | async; as otherCrews) {
+                        <div class="other-crews-wrapper">
+                            @for (crew of otherCrews; track $index) {
+                                <div class="other-crew-info">
+                                    <h1>Identificador del transponder</h1>
+                                    <h2>{{crew.spaceship.name}}</h2>
+                                    <h1>Capitán</h1>
+                                    <h2>{{crew.captain.username}}</h2>
+                                </div>
+                            }@empty {
+                                <h2>No se ha detectado otras tripulaciones en la estrella</h2>
+                            }
+                        </div>
+                    }@else {
+                        <h1>Cargando...</h1>
+                    }
+                </div>
+
+
+
+
+            </div>
+            }
+        </div>
+
+    </div>
+</spacetrader-frame>

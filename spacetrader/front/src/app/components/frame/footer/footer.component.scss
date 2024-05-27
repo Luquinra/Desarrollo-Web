@@ -1,0 +1,18 @@
+footer{
+    @apply bg-[#34d399] rounded-sm shadow ;
+}
+.nav-item{
+    @apply text-base mr-4 hover:underline md:mr-6 font-semibold;
+}
+
+.nav-list{
+    @apply flex flex-wrap items-center mt-3 text-sm font-medium text-white sm:mt-0;
+}
+
+.copyright{
+    @apply text-base text-white sm:text-center font-semibold;
+}
+
+.c-wrapper{
+    @apply w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between;
+}
